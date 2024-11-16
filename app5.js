@@ -63,4 +63,126 @@ app.get("/janken", (req, res) => {
   res.render( 'janken', display );
 });
 
+app.get("/shindan", (req, res) => {
+  let a = req.query.seikaku1;
+  let b = req.query.seikaku2;
+  let c = req.query.seikaku3;
+
+  if(typeof(a) == "undefined") a = "off";
+  if(typeof(b) == "undefined") b = "off";
+  if(typeof(c) == "undefined") c = "off";
+
+  console.log({a, b, c});
+  
+  if(a == "on" && b == "on" && c == "on")        seikaku = "自分に自信があって，食べることが好きで，歌うことが好きです";
+  else if(a == "on" && b == "on" && c == "off")  seikaku = "自分に自信があって，食べることが好きです";
+  else if(a == "on" && b == "off" && c == "off") seikaku = "自分に自信があります";
+  else if(a == "on" && b == "off" && c == "on")  seikaku = "自分に自信があって，歌うことが好きです";
+  else if(a == "off" && b == "on" && c == "on")  seikaku = "食べることが好きで，歌うことが好きです";
+  else if(a == "off" && b == "on" && c == "off") seikaku = "食べることが好きです";
+  else if(a == "off" && b == "off" && c == "on") seikaku = "歌うことが好きです";
+  else                                           seikaku = "診断不能です";
+
+  res.render('shindan', {seikaku: seikaku});
+});
+
+app.get("/recommend", (req, res) => {
+  let ans;
+  let a = req.query.radio1;
+  let b = req.query.radio2;
+  let c = req.query.radio3;
+  let d = req.query.radio4;
+  let e = req.query.radio5;
+
+  if(typeof(a) == "undefined") a = 0;
+  if(typeof(b) == "undefined") b = 0;
+  if(typeof(c) == "undefined") c = 0;
+  if(typeof(d) == "undefined") d = 0;
+  if(typeof(e) == "undefined") e = 0;
+  
+  if(a == 1){
+    if(b == 1){
+      if(c == 1){
+        if(d == 1){
+          ans = "機動戦士ガンダムUC";
+        }
+        else if(d == 2){
+          ans = "機動戦士ガンダムSEED";
+        }
+      }
+      else if(c == 2){
+        if(d == 1){
+          ans = "機動戦士ガンダムSEED";
+        }
+        else if(d == 2){
+          ans = "機動戦士ガンダム 鉄血のオルフェンズ";
+        }
+      }
+    }
+    else if(b == 2){
+      if(c == 1){
+        if(d == 1){
+          ans = "機動戦士ガンダム 水星の魔女";
+        }
+        else if(d == 2){
+          ans = "機動戦士ガンダム 0080 ポケットの中の戦争";
+        }
+      }
+      else if(c == 2){
+        if(d == 1){
+          ans = "機動戦士ガンダムUC";
+        }
+        else if(d == 2){
+          ans = "機動戦士ガンダム 0083 STARDUST MEMORY";
+        }
+      }
+    }
+  }
+  else if(a == 2){
+    if(b == 1){
+      if(c == 1){
+        if(d == 1){
+          ans = "機動戦士ガンダム 水星の魔女";
+        }
+        else if(d == 2){
+          ans = "機動戦士ガンダム 第08MS小隊";
+        }
+      }
+      else if(c == 2){
+        if(d == 1){
+          ans = "機動戦士ガンダム 鉄血のオルフェンズ";
+        }
+        else if(d == 2){
+          ans = "機動戦士ガンダム";
+        }
+      }
+    }
+    else if(b == 2){
+      if(c == 1){
+        if(d == 1){
+          ans = "機動戦士ガンダム 閃光のハサウェイ";
+        }
+        else if(d == 2){
+          ans = "機動戦士ガンダム THE ORIGIN";
+        }
+      }
+      else if(c == 2){
+        if(d == 1){
+          ans = "機動戦士ガンダムUC";
+        }
+        else if(d == 2){
+          ans = "劇場版 機動戦士ガンダム";
+        }
+      }
+    }
+  }
+
+  if(e == 1) ans = "ガンダムビルドファイターズ";
+
+  if(a == 0 || b == 0 || c == 0 || d == 0 || e == 0) ans = "選択していない項目があります";
+
+  console.log({a, b, c, d, e, ans});
+  
+  res.render('recommend', {ans: ans});
+});
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
