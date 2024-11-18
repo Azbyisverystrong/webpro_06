@@ -12,7 +12,7 @@ views/shindan.ejs | 性格診断のテンプレートファイル
 public/recommend | おすすめガンダム作品診断の開始画面
 views/recommend.ejs | おすすめガンダム作品診断のテンプレートファイル
  
-##　じゃんけん
+## じゃんけん
 ### 起動の手順
 1. ターミナルで```node app5.js```を打ちapp5.jsを起動する．
 1. Webブラウザでhttp://localhost:8080/public/janken.html にアクセスする．
@@ -50,7 +50,7 @@ handan --> end1
 1. Webブラウザでhttp://localhost:8080/public/shindan.html にアクセスする．
 1. 自分に当てはまるものにチェックを入れる．
 
-###　機能
+### 機能
 ・選択したものによって性格を表示する．
 
 ### ドキュメント
@@ -105,7 +105,7 @@ hyouji --> end1
 ```
 
 ## おすすめガンダム作品診断
-###　起動の手順
+### 起動の手順
 1. ターミナルで```node app5.js```を打ちapp5.jsを起動する．
 1. Webブラウザでhttp://localhost:8080/public/recommend.html にアクセスする．
 1. 質問に答える．
