@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <script src="get_test03.js" defer></script>
+    <title>じゃんけん</title>
+</head>
+<body>
+    <form action="/janken">
+        <input type="text" name="hand" required>
+        <label for="hand">何を出す？</label>
+        <input type="submit" values="じゃんけん　ポン">
+        <input type="hidden" name="win" value="0">
+       <input type="hidden" name="total" value="<%= total %>">
+    </form>
+</body>
+</html>
