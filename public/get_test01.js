@@ -9,7 +9,7 @@ getbutton.addEventListener('click', () => {
         return response.json();
     })
     .then( (response) => {
-        display.value = response.answer;
+        display.value = response.result;
         console.log( response );
     })
 })

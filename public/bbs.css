@@ -1,0 +1,23 @@
+.cover {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #c0c0c0;
+    margin: 3px;
+}
+
+.number{
+    margin-right: 3px;
+}
+.name {
+    font-weight: bold;
+    width: 8em;
+}
+
+.mes {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.good{
+    text-align: auto;
+}
