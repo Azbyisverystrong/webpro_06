@@ -114,6 +114,11 @@ app.post("/block_post", (req, res) => {
   res.json({number: block_name.length});
 })
 
+app.post("/block_reset", (req, res) =>{
+  block_name = [];
+  res.json({number: block_name.length});
+})
+
 app.post("/good_post", (req, res) => {
   const good = req.body.good_number;
   console.log([good]);

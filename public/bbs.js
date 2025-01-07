@@ -63,7 +63,7 @@ document.querySelector('#blockcheck').addEventListener('click', () => {
             mes_area.innerText = mes.message;
             for(let block_check of response.block_name){
                 if(mes.name == block_check.block_name){
-                    mes_area.innerText = "ブロックしたユーザーの投稿です。";
+                    mes_area.innerText = "キックされたユーザーの投稿です。";
                     break;
                 }
             }
@@ -293,5 +293,27 @@ document.querySelector('#goodsign').addEventListener('click', () => {
     .then( (response) => {
         console.log( response );
         document.querySelector('#good').value = "";
+    });
+});
+
+document.querySelector('#block_reset').addEventListener('click', () => {
+    const params = {  // URL Encode
+        method: "POST",
+        body:  '',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    };
+    console.log( params );
+    const url = "/block_reset";
+    fetch( url, params )
+    .then( (response) => {
+        if( !response.ok ) {
+            throw new Error('Error');
+        }
+        return response.json();
+    })
+    .then( (response) => {
+        console.log( response );
     });
 });
