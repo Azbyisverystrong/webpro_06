@@ -29,15 +29,14 @@ document.querySelector('#post').addEventListener('click', () => {
 });
 
 document.querySelector('#blockcheck').addEventListener('click', () => {
-    number = 0;
-    const params = {  // URL Encode
+    const params = {
         method: "POST",
-        body:  '',
+        body: 'start='+0,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'               
         }
-    };
-    const url = "/check";
+    }
+    const url = "/read";
     fetch( url, params )
     .then( (response) => {
         if( !response.ok ) {
@@ -46,69 +45,48 @@ document.querySelector('#blockcheck').addEventListener('click', () => {
         return response.json();
     })
     .then( (response) => {
-        let value = response.number;
-        console.log( value );
-
-        console.log( number );
-        const params = {
-            method: "POST",
-            body: 'start='+number,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'               
-            }
-        }
-        const url = "/read";
-        fetch( url, params )
-        .then( (response) => {
-            if( !response.ok ) {
-                throw new Error('Error');
-            }
-            return response.json();
-        })
-        .then( (response) => {
-            bbs.innerText = '';
-            var count = 1;
-            number += response.messages.length;
-            for( let mes of response.messages ) {
-                console.log( mes );  // 表示する投稿
-                let cover = document.createElement('div');
-                cover.className = 'cover';
-                let number_area = document.createElement("span");
-                number_area.className = "number";
-                number_area.innerText = count+" ";
-                let name_area = document.createElement('span');
-                name_area.className = 'name';
-                name_area.innerText = mes.name;
-                let mes_area = document.createElement('span');
-                mes_area.className = 'mes';
-                mes_area.innerText = mes.message;
-                for(let block_check of response.block_name){
-                    if(mes.name == block_check.block_name){
-                        mes_area.innerText = "ブロックしたユーザーの投稿です。";
-                        break;
-                    }
+        bbs.innerText = '';
+        var count = 1;
+        number += response.messages.length;
+        for( let mes of response.messages ) {
+            console.log( mes );  // 表示する投稿
+            let cover = document.createElement('div');
+            cover.className = 'cover';
+            let number_area = document.createElement("span");
+            number_area.className = "number";
+            number_area.innerText = count+" ";
+            let name_area = document.createElement('span');
+            name_area.className = 'name';
+            name_area.innerText = mes.name;
+            let mes_area = document.createElement('span');
+            mes_area.className = 'mes';
+            mes_area.innerText = mes.message;
+            for(let block_check of response.block_name){
+                if(mes.name == block_check.block_name){
+                    mes_area.innerText = "ブロックしたユーザーの投稿です。";
+                    break;
                 }
-                cover.appendChild(number_area);
-                cover.appendChild( name_area );
-                cover.appendChild( mes_area );
-
-                bbs.appendChild( cover );
-
-                count++;
             }
-        })
-    });
+            cover.appendChild(number_area);
+            cover.appendChild( name_area );
+            cover.appendChild( mes_area );
+
+            bbs.appendChild( cover );
+
+            count++;
+        }
+    })
 });
 
 document.querySelector('#check').addEventListener('click', () => {
-    const params = {  // URL Encode
+    const params = {
         method: "POST",
-        body:  '',
+        body: 'start='+0,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'               
         }
-    };
-    const url = "/check";
+    }
+    const url = "/read";
     fetch( url, params )
     .then( (response) => {
         if( !response.ok ) {
@@ -117,51 +95,30 @@ document.querySelector('#check').addEventListener('click', () => {
         return response.json();
     })
     .then( (response) => {
-        let value = response.number;
-        console.log( value );
+        bbs.innerText = "";
+        var count = 1;
+        number += response.messages.length;
+        for( let mes of response.messages ) {
+            console.log( mes );  // 表示する投稿
+            let cover = document.createElement('div');
+            cover.className = 'cover';
+            let number_area = document.createElement('span');
+            number_area.className = 'number';
+            number_area.innerText = count+' ';
+            let name_area = document.createElement('span');
+            name_area.className = 'name';
+            name_area.innerText = mes.name;
+            let mes_area = document.createElement('span');
+            mes_area.className = 'mes';
+            mes_area.innerText = mes.message;
+            cover.appendChild(number_area);
+            cover.appendChild( name_area );
+            cover.appendChild( mes_area );
 
-        console.log( number );
-        const params = {
-            method: "POST",
-            body: 'start='+0,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'               
-            }
+            bbs.appendChild( cover );
+            count++;
         }
-        const url = "/read";
-        fetch( url, params )
-        .then( (response) => {
-            if( !response.ok ) {
-                throw new Error('Error');
-            }
-            return response.json();
-        })
-        .then( (response) => {
-            bbs.innerText = "";
-            var count = 1;
-            number += response.messages.length;
-            for( let mes of response.messages ) {
-                console.log( mes );  // 表示する投稿
-                let cover = document.createElement('div');
-                cover.className = 'cover';
-                let number_area = document.createElement('span');
-                number_area.className = 'number';
-                number_area.innerText = count+' ';
-                let name_area = document.createElement('span');
-                name_area.className = 'name';
-                name_area.innerText = mes.name;
-                let mes_area = document.createElement('span');
-                mes_area.className = 'mes';
-                mes_area.innerText = mes.message;
-                cover.appendChild(number_area);
-                cover.appendChild( name_area );
-                cover.appendChild( mes_area );
-
-                bbs.appendChild( cover );
-                count++;
-            }
-        })
-    });
+    })
 });
 
 document.querySelector('#tencheck').addEventListener('click', () => {
@@ -233,15 +190,14 @@ document.querySelector('#tencheck').addEventListener('click', () => {
 });
 
 document.querySelector('#goodcheck').addEventListener('click', () => {
-    number = 0;
-    const params = {  // URL Encode
+    const params = {
         method: "POST",
-        body:  '',
+        body: 'start='+0,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded'               
         }
-    };
-    const url = "/check";
+    }
+    const url = "/read";
     fetch( url, params )
     .then( (response) => {
         if( !response.ok ) {
@@ -250,65 +206,44 @@ document.querySelector('#goodcheck').addEventListener('click', () => {
         return response.json();
     })
     .then( (response) => {
-        let value = response.number;
-        console.log( value );
+        bbs.innerText = '';
+        var count = 1;
+        number += response.messages.length;
+        for( let mes of response.messages ) {
+            console.log( mes );  // 表示する投稿
+            let cover = document.createElement('div');
+            cover.className = 'cover';
 
-        console.log( number );
-        const params = {
-            method: "POST",
-            body: 'start='+number,
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'               
+            let number_area = document.createElement("span");
+            number_area.className = "number";
+            number_area.innerText = count+" ";
+
+            let name_area = document.createElement('span');
+            name_area.className = 'name';
+            name_area.innerText = mes.name;
+
+            let mes_area = document.createElement('span');
+            mes_area.className = 'mes';
+            mes_area.innerText = mes.message;
+
+            let good_area = document.createElement("span");
+            good_area.className = "good";
+            let good_count = 0;
+            for(let good_check of response.good_number){
+                if(count == good_check.good_number) good_count++;
             }
+            good_area.innerText = "いいね: "+good_count;
+
+            cover.appendChild(number_area);
+            cover.appendChild( name_area );
+            cover.appendChild( mes_area );
+            cover.appendChild(good_area);
+
+            bbs.appendChild( cover );
+
+            count++;
         }
-        const url = "/read";
-        fetch( url, params )
-        .then( (response) => {
-            if( !response.ok ) {
-                throw new Error('Error');
-            }
-            return response.json();
-        })
-        .then( (response) => {
-            bbs.innerText = '';
-            var count = 1;
-            number += response.messages.length;
-            for( let mes of response.messages ) {
-                console.log( mes );  // 表示する投稿
-                let cover = document.createElement('div');
-                cover.className = 'cover';
-
-                let number_area = document.createElement("span");
-                number_area.className = "number";
-                number_area.innerText = count+" ";
-
-                let name_area = document.createElement('span');
-                name_area.className = 'name';
-                name_area.innerText = mes.name;
-
-                let mes_area = document.createElement('span');
-                mes_area.className = 'mes';
-                mes_area.innerText = mes.message;
-
-                let good_area = document.createElement("span");
-                good_area.className = "good";
-                let good_count = 0;
-                for(let good_check of response.good_number){
-                    if(count == good_check.good_number) good_count++;
-                }
-                good_area.innerText = "いいね: "+good_count;
-
-                cover.appendChild(number_area);
-                cover.appendChild( name_area );
-                cover.appendChild( mes_area );
-                cover.appendChild(good_area);
-
-                bbs.appendChild( cover );
-
-                count++;
-            }
-        })
-    });
+    })
 });
 
 document.querySelector('#block').addEventListener('click', () => {
